@@ -1,0 +1,7 @@
+course,CSCI101,Introduction to Computer Science,UNDERGRADUATE,L001
+course,MATH201,Advanced Mathematics,UNDERGRADUATE,None
+course,SECV2223,Web Programming,UNDERGRADUATE,None
+course,SECJ2154,Object Oriented Programming,POSTGRADUATE,None
+member,Pupil,P001,John Doe,johndoe@example.com,CSCI101
+member,Lecturer,L001,Professor Smith,smith@graduate.utm.my
+member,Lecturer,L002,Dr Ali,ali@graduate.utm.my

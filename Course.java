@@ -1,63 +1,61 @@
-import java.util.*;
+import java.util.ArrayList;
 
-public class Course {
-  private String courseName;
-  private String  courseCode;
-  private int credit ;
-  private ArrayList<Student> studentList;
-  private ArrayList<Staff> staffList;
+class Course {
+    private String courseCode;
+    private String title;
+    private CourseLevel level;
+    private ArrayList<Pupil> enrolledStudents;
+    private Lecturer lecturer;
 
-  public Course(String courseName, String courseCode, int credit){
-    this.courseName = courseName;
-    this.courseCode = courseCode;
-    this.credit = credit;
-  }
-
-  public void addStaff(Staff staff){
-    staffList.add(staff);
-  }
-
-  public void addStudent(Student student){
-    studentList.add(student);
-  }
-
-  public String getCourseName(){
-    return courseName;
-  }
-  
-  public String getCourseCode(){
-    return courseCode;
-  }
-
-  public void removeStaff(Staff staff){
-    staffList.remove(staff);
-  }
-
-  public void removeStudent(Student student){
-    studentList.remove(student);
-  }
-
-  public void print(){
-    System.out.println("Course Name: " + courseName);
-    System.out.println("Course Code: " + courseCode);
-    System.out.println("Credit: " + credit);
-    System.out.println("Staffs: ");
-    for (Staff staff : staffList){
-      System.out.println(staff.getName());
+    public Course(String courseCode, String title, CourseLevel level) {
+        this.courseCode = courseCode;
+        this.title = title;
+        this.level = level;
+        this.enrolledStudents = new ArrayList<>();
     }
-    System.out.println("Students: ");
-    for (Student student : studentList){
-      System.out.println(student.getName());
-    }
-  }
 
-  public void readCourses(){
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Enter Course Name: ");
-    courseName = sc.nextLine();
-    System.out.println("Enter Course Code: ");
-    courseCode = sc.nextLine();
-    System.out.println("Enter Credit: ");
-    credit = sc.nextInt();
-  }
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public String getDetails() {
+        return "Course Code: " + courseCode + ", Title: " + title + ", Level: " + level + ", Lecturer: " + (lecturer != null ? lecturer.getName() : "None");
+    }
+
+    public void enrollStudent(Pupil student) {
+        if (!enrolledStudents.contains(student)) {
+            enrolledStudents.add(student);
+            student.enrollInCourse(this);
+        } else {
+            throw new IllegalStateException("Student is already enrolled in this course");
+        }
+    }
+
+    public void removeLecturer() {
+        if (lecturer != null) {
+            lecturer.removeCourseTaught(this);
+            lecturer = null;
+        }
+    }
+
+    public void assignLecturer(Lecturer lecturer) {
+        this.lecturer = lecturer;
+        lecturer.addCourseTaught(this);
+    }
+
+    public ArrayList<Pupil> getEnrolledStudents() {
+        return enrolledStudents;
+    }
+
+    public Lecturer getLecturer() {
+        return lecturer;
+    }
+
+    public CourseLevel getLevel() {
+        return level;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }

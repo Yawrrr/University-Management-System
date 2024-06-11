@@ -1,26 +1,29 @@
-import java.util.*;
+import java.util.ArrayList;
 
-public class University {
-  private String name;
-  private ArrayList<Department> departmentList;
+class University {
+    private String name;
+    private ArrayList<Course> courses;
+    private ArrayList<UTMMember> members;
 
-  public University(){
-    departmentList = new ArrayList<Department>();
-  }
-  
-  public University(String name){
-    this.name = name;
-  }
+    public University(String name) {
+        this.name = name;
+        this.courses = new ArrayList<>();
+        this.members = new ArrayList<>();
+    }
 
-  public void addDepartment(Department department){
-    departmentList.add(department);
-  }
+    public void addCourse(Course course) {
+        courses.add(course);
+    }
 
-  public ArrayList<Department> getDepartments(){
-    return departmentList;
-  }
-}
+    public void addMember(UTMMember member) {
+        members.add(member);
+    }
 
-enum UniversityType {
-  PUBLIC, PRIVATE
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public ArrayList<UTMMember> getMembers() {
+        return members;
+    }
 }
